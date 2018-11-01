@@ -2,7 +2,7 @@
 
 # React Easy Kanban
 
-A easy to use kanban board.
+A easy to use kanban board. [LIVE DEMO](https://sigalei.github.io/react-easy-kanban/)
 
 ![react easy kanban example](https://github.com/SigaLei/react-easy-kanban/blob/master/example.gif?raw=true)
 
