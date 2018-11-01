@@ -2,7 +2,9 @@
   "name": "dnd",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://sigalei.github.io/react-easy-kanban/",
   "dependencies": {
+    "gh-pages": "^2.0.1",
     "react": "^16.6.0",
     "react-beautiful-dnd": "^9.0.2",
     "react-dom": "^16.6.0",
@@ -14,6 +16,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
