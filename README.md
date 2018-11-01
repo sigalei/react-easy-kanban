@@ -9,7 +9,6 @@ A easy to use kanban board.
 #### Setup
 
 ```shell
-# Clone the simple-dev branch which does not include db and social sign-in stuff
 git clone https://github.com/SigaLei/react-easy-kanban.git
 
 cd react-easy-kanban
