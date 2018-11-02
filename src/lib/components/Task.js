@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import { Draggable } from 'react-beautiful-dnd'
 import Input from './Input'
 
@@ -8,12 +9,7 @@ const Container = styled.div`
   border: 1px solid lightgrey;
   border-radius: 10px;
   padding: 20px;
-  background-color: ${props =>
-    props.isDragDisabled
-      ? 'lightgrey'
-      : props.isDragging
-        ? '#f9c8d9'
-        : 'lightblue'};
+  background-color: ${props => (props.isDragging ? '#f9c8d9' : 'lightblue')};
   box-shadow: ${props =>
     props.isDragging
       ? '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);'
@@ -30,7 +26,7 @@ export default class Task extends React.Component {
     const newState = {
       ...this.state
     }
-  
+
     newState.task.content = value
     this.setState({ ...newState })
   }
@@ -54,11 +50,16 @@ export default class Task extends React.Component {
             <Input
               value={this.props.task.content}
               onChange={this.handleChange}
-              color='black' 
-              />
+              color="black"
+            />
           </Container>
         )}
       </Draggable>
     )
   }
+}
+
+Task.propTypes = {
+  task: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired
 }
