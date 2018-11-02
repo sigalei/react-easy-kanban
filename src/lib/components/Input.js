@@ -13,6 +13,7 @@ const Content = styled.p`
   word-break: break-all;
   max-width: 150px;
 `
+const KEYBOARD_ENTER_CODE = 13
 
 export default class Input extends React.Component {
   constructor(props) {
@@ -22,8 +23,12 @@ export default class Input extends React.Component {
     }
   }
 
-  handleClick() {
+  changeState() {
     this.setState({ status: !this.state.status })
+  }
+
+  handleKeyDown(e) {
+    if (e.keyCode === KEYBOARD_ENTER_CODE) this.changeState()
   }
 
   render() {
@@ -36,7 +41,8 @@ export default class Input extends React.Component {
         autoFocus
         value={value}
         onChange={e => this.props.onChange(e.target.value)} // TODO Solve this change
-        onClick={() => this.handleClick()}
+        onClick={() => this.changeState()}
+        onKeyDown={e => this.handleKeyDown(e)}
         inputStyle={{
           color: 'white',
           textAlign: 'center',
@@ -56,7 +62,7 @@ export default class Input extends React.Component {
         }}
       />
     ) : (
-      <Content onClick={() => this.handleClick()}>{value}</Content>
+      <Content onClick={() => this.changeState()}>{value}</Content>
     )
   }
 }
