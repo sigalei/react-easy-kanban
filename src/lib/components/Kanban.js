@@ -17,7 +17,7 @@ class InnerList extends React.PureComponent {
   }
 }
 
-class App extends Component {
+class Kanban extends Component {
   state = initialData
 
   onDragEnd = result => {
@@ -128,4 +128,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default Kanban
