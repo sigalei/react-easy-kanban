@@ -1,6 +1,6 @@
 {
   "name": "react-easy-kanban",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A easy to use react kanban.",
   "main": "build/index.js",
   "scripts": {
@@ -8,6 +8,9 @@
     "build": "node scripts/build.js",
     "demo": "node scripts/demo.js",
     "test": "node scripts/test.js --env=jsdom"
+  },
+  "engines": {
+    "node": ">=8.0.0"
   },
   "repository": {
     "type": "git",
@@ -19,6 +22,11 @@
   },
   "homepage": "https://sigalei.github.io/react-easy-kanban/",
   "license": "MIT",
+  "keywords": [
+    "react",
+    "kanban",
+    "dnd"
+  ],
   "dependencies": {
     "react-beautiful-dnd": "^9.0.2",
     "react-input-autosize": "^2.2.1",
