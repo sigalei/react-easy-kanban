@@ -1,3 +1,3 @@
-import Kanban from './components/Kanban';
+import Kanban from './components/Kanban'
 
-export default Kanban;
+export default Kanban
