@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import Task from './Task'
+import PropTypes from 'prop-types'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 import Input from './Input'
+import InnerList from './InnerList'
 
 const Container = styled.div`
   margin: 8px;
@@ -25,20 +26,6 @@ const TaskList = styled.div`
   background-color: ${props => (props.isDraggingOver ? 'skyblue' : '#eeeeee')};
 `
 
-class InnerList extends React.Component {
-  shouldComponentUpdate(nextProps) {
-    if (nextProps.tasks === this.props.tasks) {
-      return false
-    }
-    return true
-  }
-  render() {
-    return this.props.tasks.map((task, index) => (
-      <Task key={task.id} task={task} index={index} />
-    ))
-  }
-}
-
 export default class Column extends React.Component {
   constructor(props) {
     super(props)
@@ -55,25 +42,30 @@ export default class Column extends React.Component {
   }
 
   render() {
+    const { column, tasks } = this.props
+
     return (
-      <Draggable draggableId={this.props.column.id} index={this.props.index}>
-        {provided => (
-          <Container {...provided.draggableProps} ref={provided.innerRef}>
-            <Header {...provided.dragHandleProps}>
+      <Draggable draggableId={column.id} index={this.props.index}>
+        {draggableProvided => (
+          <Container
+            {...draggableProvided.draggableProps}
+            ref={draggableProvided.innerRef}
+          >
+            <Header {...draggableProvided.dragHandleProps}>
               <Input
                 value={this.state.column.title}
                 onChange={this.handleChange}
               />
             </Header>
-            <Droppable droppableId={this.props.column.id} type="task">
-              {(provided, snapshot) => (
+            <Droppable droppableId={column.id} type="task">
+              {(droppableProvided, snapshot) => (
                 <TaskList
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
+                  ref={droppableProvided.innerRef}
+                  {...droppableProvided.droppableProps}
                   isDraggingOver={snapshot.isDraggingOver}
                 >
-                  <InnerList tasks={this.props.tasks} />
-                  {provided.placeholder}
+                  <InnerList tasks={tasks} />
+                  {droppableProvided.placeholder}
                 </TaskList>
               )}
             </Droppable>
@@ -82,4 +74,10 @@ export default class Column extends React.Component {
       </Draggable>
     )
   }
+}
+
+Column.propTypes = {
+  tasks: PropTypes.array.isRequired,
+  column: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired
 }

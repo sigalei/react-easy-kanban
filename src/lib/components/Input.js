@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import AutosizeInput from 'react-input-autosize'
+import PropTypes from 'prop-types'
 
 const Content = styled.p`
   color: white;
@@ -26,12 +27,14 @@ export default class Input extends React.Component {
   }
 
   render() {
+    const { value } = this.props
+
     return this.state.status ? (
       <AutosizeInput
         type="textarea"
         name="name"
         autoFocus
-        value={this.props.value}
+        value={value}
         onChange={e => this.props.onChange(e.target.value)} // TODO Solve this change
         onClick={() => this.handleClick()}
         inputStyle={{
@@ -53,7 +56,12 @@ export default class Input extends React.Component {
         }}
       />
     ) : (
-      <Content onClick={() => this.handleClick()}>{this.props.value}</Content>
+      <Content onClick={() => this.handleClick()}>{value}</Content>
     )
   }
+}
+
+Input.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
 }

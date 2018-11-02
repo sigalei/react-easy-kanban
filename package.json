@@ -28,6 +28,7 @@
     "dnd"
   ],
   "dependencies": {
+    "prop-types": "^15.6.2",
     "react-beautiful-dnd": "^9.0.2",
     "react-input-autosize": "^2.2.1",
     "styled-components": "^4.0.3"
@@ -46,11 +47,13 @@
     "css-loader": "0.28.7",
     "dotenv": "4.0.0",
     "eslint": "4.10.0",
-    "eslint-config-react-app": "^2.0.1",
+    "eslint-config-airbnb": "^15.0.1",
+    "eslint-config-prettier": "^2.5.0",
     "eslint-loader": "1.9.0",
     "eslint-plugin-flowtype": "2.39.1",
     "eslint-plugin-import": "2.8.0",
     "eslint-plugin-jsx-a11y": "5.1.1",
+    "eslint-plugin-prettier": "^2.3.1",
     "eslint-plugin-react": "7.4.0",
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.5",
@@ -60,6 +63,7 @@
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.8",
+    "prettier": "^1.14.3",
     "promise": "8.0.1",
     "raf": "3.4.0",
     "react": "^16.2.0",
