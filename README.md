@@ -28,3 +28,4 @@ The app will run on http://localhost:3000
 
 ### Credits
 Based on Alex Reardon's tutorial in https://egghead.io/courses/beautiful-and-accessible-drag-and-drop-with-react-beautiful-dnd
+Used https://github.com/DimiMikadze/create-react-library
