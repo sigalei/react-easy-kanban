@@ -1,21 +1,12 @@
 import React, { Component } from 'react'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import styled from 'styled-components'
-import './initial-data'
-import Column from './Column'
 import initialData from './initial-data'
+import KanbanInnerList from './KanbanInnerList'
 
 const Container = styled.div`
   display: flex;
 `
-
-class InnerList extends React.PureComponent {
-  render() {
-    const { column, taskMap, index } = this.props
-    const tasks = column.taskIds.map(taskId => taskMap[taskId])
-    return <Column column={column} tasks={tasks} index={index} />
-  }
-}
 
 class Kanban extends Component {
   state = initialData
@@ -111,7 +102,7 @@ class Kanban extends Component {
               {this.state.columnOrder.map((columnId, index) => {
                 const column = this.state.columns[columnId]
                 return (
-                  <InnerList
+                  <KanbanInnerList
                     key={column.id}
                     column={column}
                     taskMap={this.state.tasks}
