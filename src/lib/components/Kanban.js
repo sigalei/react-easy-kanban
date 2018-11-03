@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import initialData from './initial-data'
 import KanbanInnerList from './KanbanInnerList'
 
 const Container = styled.div`
@@ -9,9 +9,12 @@ const Container = styled.div`
 `
 
 class Kanban extends Component {
-  state = initialData
-
+  constructor(props) {
+    super(props)
+    this.state = { ...this.props }
+  }
   onDragEnd = result => {
+    const { columnsOrder, columns } = this.state
     const { destination, source, draggableId, type } = result
 
     if (!destination) {
@@ -26,21 +29,20 @@ class Kanban extends Component {
     }
 
     if (type === 'column') {
-      const newColumnOrder = Array.from(this.state.columnOrder)
-      newColumnOrder.splice(source.index, 1)
-      newColumnOrder.splice(destination.index, 0, draggableId)
-
+      const newColumnsOrder = Array.from(columnsOrder)
+      newColumnsOrder.splice(source.index, 1)
+      newColumnsOrder.splice(destination.index, 0, draggableId)
       const newState = {
         ...this.state,
-        columnOrder: newColumnOrder
+        columnsOrder: newColumnsOrder
       }
 
       this.setState(newState)
       return
     }
 
-    const home = this.state.columns[source.droppableId]
-    const foreign = this.state.columns[destination.droppableId]
+    const home = columns[source.droppableId]
+    const foreign = columns[destination.droppableId]
 
     if (home === foreign) {
       const newTaskIds = Array.from(home.taskIds)
@@ -55,7 +57,7 @@ class Kanban extends Component {
       const newState = {
         ...this.state,
         columns: {
-          ...this.state.columns,
+          ...columns,
           [newColumn.id]: newColumn
         }
       }
@@ -81,7 +83,7 @@ class Kanban extends Component {
     const newState = {
       ...this.state,
       columns: {
-        ...this.state.columns,
+        ...columns,
         [newStart.id]: newStart,
         [newFinish.id]: newFinish
       }
@@ -90,6 +92,8 @@ class Kanban extends Component {
   }
 
   render() {
+    const { columnsOrder, tasks, columns } = this.state
+
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <Droppable
@@ -99,13 +103,13 @@ class Kanban extends Component {
         >
           {provided => (
             <Container {...provided.droppableProps} ref={provided.innerRef}>
-              {this.state.columnOrder.map((columnId, index) => {
-                const column = this.state.columns[columnId]
+              {columnsOrder.map((columnId, index) => {
+                const column = columns[columnId]
                 return (
                   <KanbanInnerList
                     key={column.id}
                     column={column}
-                    taskMap={this.state.tasks}
+                    taskMap={tasks}
                     index={index}
                   />
                 )
@@ -117,6 +121,16 @@ class Kanban extends Component {
       </DragDropContext>
     )
   }
+}
+
+Kanban.propTypes = {
+  tasks: PropTypes.object,
+  columns: PropTypes.object.isRequired,
+  columnsOrder: PropTypes.array.isRequired
+}
+
+Kanban.defaultProps = {
+  tasks: {}
 }
 
 export default Kanban
