@@ -43,6 +43,7 @@ export default class Input extends React.Component {
         onChange={e => this.props.onChange(e.target.value)} // TODO Solve this change
         onClick={() => this.changeState()}
         onKeyDown={e => this.handleKeyDown(e)}
+        onMouseLeave={() => this.changeState()}
         inputStyle={{
           color: 'white',
           textAlign: 'center',
