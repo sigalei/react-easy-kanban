@@ -14,6 +14,7 @@ const Content = styled.p`
   max-width: 150px;
 `
 const KEYBOARD_ENTER_CODE = 13
+const KEYBOARD_ESC_CODE = 27
 
 export default class Input extends React.Component {
   constructor(props) {
@@ -29,6 +30,7 @@ export default class Input extends React.Component {
 
   handleKeyDown(e) {
     if (e.keyCode === KEYBOARD_ENTER_CODE) this.changeState()
+    else if (e.keyCode === KEYBOARD_ESC_CODE) this.changeState()
   }
 
   render() {
