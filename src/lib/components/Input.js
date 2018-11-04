@@ -1,3 +1,4 @@
+/* global document */
 import React from 'react'
 import styled from 'styled-components'
 import AutosizeInput from 'react-input-autosize'
@@ -20,7 +21,26 @@ export default class Input extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      value: this.props.value,
       status: false
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener('mousedown', e => this.handleClickOutside(e))
+  }
+
+  onChange(value) {
+    this.setState({ value })
+  }
+
+  handleClick() {
+    this.changeState()
+  }
+
+  handleClickOutside(event) {
+    if (this.textInput && !this.textInput.contains(event.target)) {
+      this.setState({ status: false })
     }
   }
 
@@ -34,43 +54,48 @@ export default class Input extends React.Component {
   }
 
   render() {
-    const { value } = this.props
+    const { value } = this.state
 
-    return this.state.status ? (
-      <AutosizeInput
-        type="textarea"
-        name="name"
-        autoFocus
-        value={value}
-        onChange={e => this.props.onChange(e.target.value)} // TODO Solve this change
-        onClick={() => this.changeState()}
-        onKeyDown={e => this.handleKeyDown(e)}
-        onMouseLeave={() => this.changeState()}
-        inputStyle={{
-          color: 'white',
-          textAlign: 'center',
-          background: 'transparent',
-          border: 'none',
-          fontSize: '18px',
-          wordWrap: 'break-word',
-          wordBreak: 'break-all',
-          outline: 'none',
-          padding: '15px',
-          alignSelf: 'center',
-          minWidth: '80px',
-          maxWidth: '150px'
+    return (
+      <div
+        ref={element => {
+          this.textInput = element
         }}
-        style={{
-          maxSize: '150px'
-        }}
-      />
-    ) : (
-      <Content onClick={() => this.changeState()}>{value}</Content>
+      >
+        {this.state.status ? (
+          <AutosizeInput
+            type="textarea"
+            name="name"
+            autoFocus
+            value={value}
+            onChange={e => this.onChange(e.target.value)}
+            onKeyDown={e => this.handleKeyDown(e)}
+            inputStyle={{
+              color: 'white',
+              textAlign: 'center',
+              background: 'transparent',
+              border: 'none',
+              fontSize: '18px',
+              wordWrap: 'break-word',
+              wordBreak: 'break-all',
+              outline: 'none',
+              padding: '15px',
+              alignSelf: 'center',
+              minWidth: '80px',
+              maxWidth: '150px'
+            }}
+            style={{
+              maxSize: '150px'
+            }}
+          />
+        ) : (
+          <Content onClick={() => this.handleClick()}>{value}</Content>
+        )}
+      </div>
     )
   }
 }
 
 Input.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired
+  value: PropTypes.string.isRequired
 }

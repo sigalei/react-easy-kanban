@@ -9,6 +9,7 @@ const Container = styled.div`
   border: 1px solid lightgrey;
   border-radius: 10px;
   padding: 20px;
+  width: 150px
   background-color: ${props => (props.isDragging ? '#f9c8d9' : 'lightblue')};
   box-shadow: ${props =>
     props.isDragging

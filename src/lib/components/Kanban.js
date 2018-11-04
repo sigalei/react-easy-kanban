@@ -13,6 +13,7 @@ class Kanban extends Component {
     super(props)
     this.state = { ...this.props }
   }
+
   onDragEnd = result => {
     const { columnsOrder, columns } = this.state
     const { destination, source, draggableId, type } = result
