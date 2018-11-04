@@ -9,12 +9,12 @@ const initialData = {
     column1: {
       id: 'column1',
       title: 'To do',
-      taskIds: ['task1', 'task2', 'task3', 'task4']
+      taskIds: ['task1', 'task3', 'task4']
     },
     column2: {
       id: 'column2',
       title: 'Doing',
-      taskIds: []
+      taskIds: ['task2']
     },
     column3: {
       id: 'column3',
@@ -22,7 +22,7 @@ const initialData = {
       taskIds: []
     }
   },
-  columnOrder: ['column1', 'column2', 'column3']
+  columnsOrder: ['column1', 'column2', 'column3']
 }
 
 export default initialData
