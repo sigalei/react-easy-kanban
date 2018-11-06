@@ -10,12 +10,23 @@ export default class InnerList extends React.Component {
     return true
   }
   render() {
-    return this.props.tasks.map((task, index) => (
-      <Task key={task.id} task={task} index={index} />
+    const { tasks, taskContentStyle } = this.props
+    return tasks.map((task, index) => (
+      <Task
+        key={task.id}
+        task={task}
+        index={index}
+        taskContentStyle={taskContentStyle}
+      />
     ))
   }
 }
 
 InnerList.propTypes = {
-  tasks: PropTypes.array.isRequired
+  tasks: PropTypes.array.isRequired,
+  taskContentStyle: PropTypes.object
+}
+
+InnerList.defaultProps = {
+  taskContentStyle: {}
 }
