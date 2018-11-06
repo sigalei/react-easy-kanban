@@ -21,8 +21,14 @@ export default class Task extends React.Component {
   constructor(props) {
     super(props)
     this.state = { ...this.props }
+    this.input = React.createRef()
   }
-
+  handleClick = event => {
+    event.preventDefault()
+    this.input.current.setState({
+      status: true
+    })
+  }
   handleChange = value => {
     const newState = {
       ...this.state
@@ -46,9 +52,11 @@ export default class Task extends React.Component {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
+            onClick={this.handleClick}
             isDragging={snapshot.isDragging}
           >
             <Input
+              ref={this.input}
               value={this.props.task.content}
               onChange={this.handleChange}
               color="black"
