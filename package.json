@@ -1,6 +1,6 @@
 {
   "name": "react-easy-kanban",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A easy to use react kanban.",
   "main": "build/index.js",
   "scripts": {
