@@ -9,7 +9,11 @@ const Container = styled.div`
   border: 1px solid lightgrey;
   border-radius: 10px;
   padding: 20px;
-  width: 150px
+  width: auto;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   background-color: ${props => (props.isDragging ? '#f9c8d9' : 'lightblue')};
   box-shadow: ${props =>
     props.isDragging

@@ -9,13 +9,16 @@ const Container = styled.div`
   margin: 8px;
   border: 1px solid lightgrey;
   border-radius: 2px;
-  width: 220px;
+  width: 33.33%;
   display: flex;
   flex-direction: column;
 `
 const Header = styled.div`
   background-color: #000;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
 const TaskList = styled.div`
