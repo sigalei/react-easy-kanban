@@ -5,20 +5,25 @@ import { Draggable } from 'react-beautiful-dnd'
 import Input from './Input'
 
 const Container = styled.div`
-  margin: 8px;
-  border: 1px solid lightgrey;
-  border-radius: 10px;
-  padding: 20px;
+  color: ${props => props.taskContentStyle.margin || 'inherit'};
+  margin: ${props => props.taskContentStyle.margin || '8px'};
+  border: ${props => props.taskContentStyle.border || '1px solid lightgrey'};
+  border-radius: ${props => props.taskContentStyle.borderRadius || '10px'};
+  padding: ${props => props.taskContentStyle.padding || '20px'};
   width: auto;
-  min-height: 60px;
+  min-height: ${props => props.taskContentStyle.minHeight || '60px'};
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: ${props => (props.isDragging ? '#f9c8d9' : 'lightblue')};
+  background-color: ${props =>
+    props.isDragging
+      ? '#f9c8d9'
+      : props.taskContentStyle.backgroundColor || 'lightblue'};
   box-shadow: ${props =>
     props.isDragging
       ? '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);'
-      : '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'};
+      : props.taskContentStyle.boxShadow ||
+        '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'};
 `
 
 export default class Task extends React.Component {
@@ -43,6 +48,7 @@ export default class Task extends React.Component {
   }
 
   render() {
+    const { taskContentStyle } = this.props
     const isDragDisabled = this.props.task.disabled
 
     return (
@@ -58,12 +64,12 @@ export default class Task extends React.Component {
             ref={provided.innerRef}
             onClick={this.handleClick}
             isDragging={snapshot.isDragging}
+            taskContentStyle={taskContentStyle}
           >
             <Input
               ref={this.input}
               value={this.props.task.content}
               onChange={this.handleChange}
-              color="black"
             />
           </Container>
         )}
@@ -74,5 +80,10 @@ export default class Task extends React.Component {
 
 Task.propTypes = {
   task: PropTypes.object.isRequired,
-  index: PropTypes.number.isRequired
+  index: PropTypes.number.isRequired,
+  taskContentStyle: PropTypes.object
+}
+
+Task.defaultProps = {
+  taskContentStyle: {}
 }

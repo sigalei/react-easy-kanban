@@ -45,7 +45,13 @@ export default class Column extends React.Component {
   }
 
   render() {
-    const { column, tasks } = this.props
+    const {
+      column,
+      tasks,
+      columnHeaderStyle,
+      columnContentStyle,
+      taskContentStyle
+    } = this.props
 
     return (
       <Draggable draggableId={column.id} index={this.props.index}>
@@ -54,7 +60,10 @@ export default class Column extends React.Component {
             {...draggableProvided.draggableProps}
             ref={draggableProvided.innerRef}
           >
-            <Header {...draggableProvided.dragHandleProps}>
+            <Header
+              {...draggableProvided.dragHandleProps}
+              style={{ ...columnHeaderStyle }}
+            >
               <Input
                 value={this.state.column.title}
                 onChange={this.handleChange}
@@ -66,8 +75,12 @@ export default class Column extends React.Component {
                   ref={droppableProvided.innerRef}
                   {...droppableProvided.droppableProps}
                   isDraggingOver={snapshot.isDraggingOver}
+                  style={{ ...columnContentStyle }}
                 >
-                  <InnerList tasks={tasks} />
+                  <InnerList
+                    tasks={tasks}
+                    taskContentStyle={taskContentStyle}
+                  />
                   {droppableProvided.placeholder}
                 </TaskList>
               )}
@@ -82,5 +95,14 @@ export default class Column extends React.Component {
 Column.propTypes = {
   tasks: PropTypes.array.isRequired,
   column: PropTypes.object.isRequired,
-  index: PropTypes.number.isRequired
+  index: PropTypes.number.isRequired,
+  columnHeaderStyle: PropTypes.object,
+  columnContentStyle: PropTypes.object,
+  taskContentStyle: PropTypes.object
+}
+
+Column.defaultProps = {
+  columnHeaderStyle: {},
+  columnContentStyle: {},
+  taskContentStyle: {}
 }

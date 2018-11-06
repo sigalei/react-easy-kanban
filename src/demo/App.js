@@ -8,6 +8,9 @@ const App = () => (
       columns={data.columns}
       tasks={data.tasks}
       columnsOrder={data.columnsOrder}
+      columnHeaderStyle={{ backgroundColor: '#2196f3', color: 'white' }}
+      columnContentStyle={{ backgroundColor: '#EEEEEE' }}
+      taskContentStyle={{ backgroundColor: 'white' }}
     />
   </div>
 )

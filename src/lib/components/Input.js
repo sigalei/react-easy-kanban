@@ -5,7 +5,7 @@ import AutosizeInput from 'react-input-autosize'
 import PropTypes from 'prop-types'
 
 const Content = styled.p`
-  color: white;
+  color: inherit;
   text-align: center;
   background: transparent;
   border: none;
@@ -71,7 +71,7 @@ export default class Input extends React.Component {
             onChange={e => this.onChange(e.target.value)}
             onKeyDown={e => this.handleKeyDown(e)}
             inputStyle={{
-              color: 'white',
+              color: 'inherit',
               textAlign: 'center',
               background: 'transparent',
               border: 'none',
@@ -82,7 +82,8 @@ export default class Input extends React.Component {
               padding: '15px',
               alignSelf: 'center',
               minWidth: '80px',
-              maxWidth: '150px'
+              maxWidth: '150px',
+              fontFamily: 'inherit'
             }}
             style={{
               maxSize: '150px'

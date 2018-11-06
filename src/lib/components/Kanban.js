@@ -94,6 +94,11 @@ class Kanban extends Component {
 
   render() {
     const { columnsOrder, tasks, columns } = this.state
+    const {
+      columnHeaderStyle,
+      columnContentStyle,
+      taskContentStyle
+    } = this.props
 
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
@@ -112,6 +117,9 @@ class Kanban extends Component {
                     column={column}
                     taskMap={tasks}
                     index={index}
+                    columnHeaderStyle={columnHeaderStyle}
+                    columnContentStyle={columnContentStyle}
+                    taskContentStyle={taskContentStyle}
                   />
                 )
               })}
@@ -127,11 +135,17 @@ class Kanban extends Component {
 Kanban.propTypes = {
   tasks: PropTypes.object,
   columns: PropTypes.object.isRequired,
-  columnsOrder: PropTypes.array.isRequired
+  columnsOrder: PropTypes.array.isRequired,
+  columnHeaderStyle: PropTypes.object,
+  columnContentStyle: PropTypes.object,
+  taskContentStyle: PropTypes.object
 }
 
 Kanban.defaultProps = {
-  tasks: {}
+  tasks: {},
+  columnHeaderStyle: {},
+  columnContentStyle: {},
+  taskContentStyle: {}
 }
 
 export default Kanban
